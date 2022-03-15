@@ -8,7 +8,8 @@ var requestHandler = function (request, response ){
 }
 
 var server = http.createServer(requestHandler);
-server.listen(port);
+var host = '0.0.0.0';
+server.listen(port,host);
 
 console.log('Node server started on port 3000');
 
