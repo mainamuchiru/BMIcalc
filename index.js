@@ -57,9 +57,11 @@ app.post('/process-contacts',urlEncodedParser, function(request, response){
     var myweight = request.body.weight;
     var myheight= request.body.height;
     var BMI = myweight/(myheight*myheight);
+    var info = {weight: myweight, height:myheight, bmi:BMI};
+    response.render("results", info);
 
-    response.end('Your weight is:'+ request.body.weight +' and your height in meters is:'+request.body.height
-                    + ' Then your BMI is:' + BMI );
+//   //  response.end('Your weight is:'+ request.body.weight +' and your height in meters is:'+request.body.height
+//                     + ' Then your BMI is:' + BMI );
                     
 
                    
