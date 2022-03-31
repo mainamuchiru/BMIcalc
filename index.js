@@ -45,6 +45,9 @@ app.set('views' , 'views');
 app.set('view engine', 'hbs');
 app.use(express.static('public'));
 
+// BMI
+const { bmiCalc } = require('./bmi.js')
+
 
 
 app.get('/contacts', function (request, response){
@@ -53,12 +56,19 @@ app.get('/contacts', function (request, response){
 
 });
 
-app.post('/process-contacts',urlEncodedParser, function(request, response){
+
+
+
+app.post('/process-contacts',urlEncodedParser, function bmi(request, response){
     var myweight = request.body.weight;
     var myheight= request.body.height;
     var BMI = myweight/(myheight*myheight);
-    var info = {weight: myweight, height:myheight, bmi:BMI};
+  
+    var status = bmiCalc(BMI);
+
+    var info = {weight: myweight, height:myheight, bmi:BMI, Status:status};
     response.render("results", info);
+    //return;
 
 //   //  response.end('Your weight is:'+ request.body.weight +' and your height in meters is:'+request.body.height
 //                     + ' Then your BMI is:' + BMI );
@@ -71,6 +81,7 @@ app.post('/process-contacts',urlEncodedParser, function(request, response){
 
 app.listen(port);
 console.log('server is listening on port ${port}');
+//module.exports = {bmi};
 
 
 
